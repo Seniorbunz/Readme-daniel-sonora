@@ -142,7 +142,9 @@ We have installed the following Beats on these machines:
 -install filebeat
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
-
+filebeat monitors the log files or locations that are specified, it collects log events and fowwards them to either Elasticsearch or logstash 
+metricbeat takes the metric and stats that it collects and ships them to the specified output
+in the winlogbeat you see the logging information, users and count of log ins, event levels and pretty pretty colors
 
 
 
@@ -150,13 +152,22 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the yaml file to /etc/ansible
+- Update the /etc/ansible/host file to include... PRIVATE IDS AND ansible_python_interpreter=/usr/bin/python3
+- Run the playbook, and navigate to curl localhost/setup.php to check that the installation worked as expected.
 
 _TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
+/etc/ansible/file/filebeat-configuration.yml
+
 - _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
+edit /etc/ansible/host file to add websever/elk ip address
+
+
+
 - _Which URL do you navigate to in order to check that the ELK server is running?
+http://104.45.211.56:5601/app/kibana
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+
+ansible-playbook filebeat.yml
